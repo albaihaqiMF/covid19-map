@@ -27,14 +27,27 @@ class LoadCountryTask {
         (covidCountry) => country.properties.ISO_A3 === covidCountry.ISO3
       );
 
+      // console.log(covidCountry)
       country.properties.confirmed = 0;
       country.properties.confirmedText = 0;
+      country.properties.recoveredText = 0;
+      country.properties.deathsText = 0;
 
       if (covidCountry != null) {
         let confirmed = Number(covidCountry.Confirmed);
+        let recovered = Number(covidCountry.Recovered);
+        let deaths = Number(covidCountry.Deaths);
         country.properties.confirmed = confirmed;
+        country.properties.recovered = recovered;
+        country.properties.deaths = deaths;
         country.properties.confirmedText = this.#formatNumberWithCommas(
           confirmed
+        );
+        country.properties.recoveredText = this.#formatNumberWithCommas(
+          recovered
+        );
+        country.properties.deathsText = this.#formatNumberWithCommas(
+          deaths
         );
       }
       this.#setCountryColor(country);
